@@ -1,0 +1,5 @@
+package com.anonymousdust.overlay;
+import android.app.*; import android.os.*; import android.content.*; import android.graphics.Color; import android.net.Uri; import android.provider.Settings; import android.view.*; import android.widget.*;
+public class MainActivity extends Activity {
+ public void onCreate(Bundle b){super.onCreate(b); LinearLayout l=new LinearLayout(this); l.setOrientation(LinearLayout.VERTICAL); l.setPadding(36,36,36,36); TextView t=new TextView(this); t.setText("Overlay Love\n\nTekan tombol untuk menampilkan pesan di atas film."); t.setTextSize(22); l.addView(t); Button start=new Button(this); start.setText("Tampilkan AKU SAYANG KAMU MIA SAYANG"); l.addView(start); Button stop=new Button(this); stop.setText("Tutup pesan"); l.addView(stop); setContentView(l); start.setOnClickListener(v->{if(!Settings.canDrawOverlays(this)){startActivity(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:"+getPackageName())));}else startService(new Intent(this,LoveOverlayService.class));}); stop.setOnClickListener(v->stopService(new Intent(this,LoveOverlayService.class))); }
+}
